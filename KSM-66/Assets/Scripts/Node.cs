@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class Node : MonoBehaviour
 {
@@ -9,15 +10,22 @@ public class Node : MonoBehaviour
     private int hCost;
     private GameObject nodeGO;
 
+
+    public Node(Vector3 worldPosition, Vector3Int gridPosition, bool isWalkable)
+    {
+        WorldPosition = worldPosition;
+        GridPosition = gridPosition;
+        IsWalkable = isWalkable;
+    }
     public GameObject NodeGO
     {
         get
         {
-            return NodeGO;
+            return nodeGO;
         }
         set
         {
-            
+            nodeGO = value;
         }
     }
 

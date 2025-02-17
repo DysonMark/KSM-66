@@ -6,9 +6,9 @@ public class Grid : MonoBehaviour
     private Node[] grid;
     [SerializeField] private int gridCountX;
     [SerializeField] private int gridCountZ;
-    private int nodeWidth;
-    private int nodeHeight;
-    private int totalNodes;
+    [SerializeField]private int nodeWidth;
+    [SerializeField]private int nodeHeight;
+    [SerializeField] private int totalNodes;
 
     private void Start()
     {
