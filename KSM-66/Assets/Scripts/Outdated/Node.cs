@@ -8,7 +8,7 @@ public class Node : MonoBehaviour
     public Vector3Int GridPosition { get; set; }
     public bool IsWalkable { get; private set; }
     private int hCost;
-    private GameObject nodeGO;
+    [SerializeField] private GameObject nodeGO;
 
 
     public Node(Vector3 worldPosition, Vector3Int gridPosition, bool isWalkable)
