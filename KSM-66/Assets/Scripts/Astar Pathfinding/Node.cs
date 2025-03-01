@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    public List<Node> open;
-    public List<Node> closed;
-    public Vector2 currentPosition;
+    public List<Node> openList;
+    public List<Node> closedList;
+    public List<Node> neighbourList;
+    public Vector2 worldPosition;
+    public bool isBlocked;
 
-    
+    public Node(Vector2 WorldPosition)
+    {
+        WorldPosition = worldPosition;
+    }
     public struct GHF
     {
         public int Gcost;
@@ -21,9 +26,5 @@ public class Node : MonoBehaviour
             Hcost = h;
             Fcost = g + h;
         }
-    }
-    private void Start()
-    {
-        
     }
 }

@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f821f318-9a47-4f69-9b02-e640a2f1741d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KSM-66/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KSM-66/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pathfinding.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pathfinding.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Grid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Grid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Node.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Node.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +98,8 @@
       <workItem from="1739822742330" duration="449000" />
       <workItem from="1740378585361" duration="3023000" />
       <workItem from="1740658222542" duration="10470000" />
+      <workItem from="1740747849418" duration="6964000" />
+      <workItem from="1740811674143" duration="27343000" />
     </task>
     <servers />
   </component>

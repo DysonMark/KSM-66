@@ -250,7 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5039960655443171008}
   - component: {fileID: 2024492927851093972}
-  - component: {fileID: 4552854575627597998}
+  - component: {fileID: 1992293327250987972}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -329,7 +329,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4552854575627597998
+--- !u!114 &1992293327250987972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,6 +341,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a796ce35fd37e042bb86cbe92ff3587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openList: []
+  closedList: []
+  neighbourList: []
+  worldPosition: {x: 0, y: 0}
   isBlocked: 0
 --- !u!1 &7049853422028293517
 GameObject:
