@@ -169,10 +169,11 @@ MonoBehaviour:
   node: {fileID: 1992293327250987972, guid: 0b4b1839618bc254bb5f8f43ee3b38b9, type: 3}
   currentPosition: {x: 0, y: 0, z: 0}
   goalPosition: {x: 7, y: 6, z: 0}
-  startPosition: {x: 6, y: 2, z: 0}
+  startPosition: {x: 3, y: 4, z: 0}
   grid: []
   totalNodes: 0
   startPositionIndex: 0
+  current: {fileID: 0}
   cam: {fileID: 330585546}
 --- !u!1 &330585543
 GameObject:

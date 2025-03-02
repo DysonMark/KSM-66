@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using UnityEditor.Timeline;
 using UnityEngine;
 
@@ -18,8 +19,12 @@ public class Grid : MonoBehaviour
     [SerializeField] public Node[] grid;
     [SerializeField] int totalNodes;
     [SerializeField] private int startPositionIndex;
+    [SerializeField] private Node current;
+    private int cellSize;
+    
     [Header("Camera")]
     [SerializeField] private Transform cam;
+    
     private void Start()
     {
        /* node = new Node(new Vector2(0, 0))
@@ -27,7 +32,9 @@ public class Grid : MonoBehaviour
             openList = new List<Node>(),
             closedList = new List<Node>(),
         };*/
-        startPositionIndex = (int)(startPosition.y * width + startPosition.x);
+       
+       // try to change with current position
+        startPositionIndex = Mathf.FloorToInt(startPosition.y ) * width + Mathf.FloorToInt(startPosition.x);
         CreateGrid();
         CenterGridCamera();
     }
@@ -45,6 +52,7 @@ public class Grid : MonoBehaviour
             for (int x = 0; x < width; x++)
             {
                var index = y * width + x;
+               Debug.Log("index: " + index);
                 var spawnGrid = Instantiate(nodePrefab, new Vector3(x, y), Quaternion.identity);
                 grid[index] = spawnGrid.GetComponent<Node>();
                 
@@ -91,6 +99,10 @@ public class Grid : MonoBehaviour
             var hCost = Vector3.Distance(currentPosition, goalPosition);
             var gCost = Vector3.Distance(currentPosition, startPosition);
             
+            Debug.Log("current pos : " + currentPosition);
+            Debug.Log("start pos : " + startPosition);
+            Debug.Log("goal pos : " + goalPosition);
+            
             Node.GHF cost = new Node.GHF((int)gCost, ((int)hCost));
             
             cost.Fcost = (int)gCost + (int)hCost;
@@ -103,11 +115,22 @@ public class Grid : MonoBehaviour
             Debug.Log("H cost: " + cost.Hcost);
             Debug.Log("F cost: " + cost.Fcost);
             Debug.Log(cost.Fcost);
+
+            current = startNode;
+            node.openList.Remove(current);
+            node.closedList.Add(current);
+            
             if (currentPosition == goalPosition)
             {
-                Debug.Log("Found the goal");
+                Debug.Log("Found the path");
                 break;
             }
+            startPositionIndex += 1;
+            current = grid[startPositionIndex];
+            Debug.Log("current 1: " + current);
+            startPositionIndex -= 2;
+            current = grid[startPositionIndex];
+            Debug.Log("current 2: " + current);
             break;
         }
     }
