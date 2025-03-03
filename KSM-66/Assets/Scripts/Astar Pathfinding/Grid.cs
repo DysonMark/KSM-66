@@ -19,6 +19,7 @@ public class Grid : MonoBehaviour
     [SerializeField] public Node[] grid;
     [SerializeField] int totalNodes;
     [SerializeField] private int startPositionIndex;
+    [SerializeField] private int currentPositionIndex;
     [SerializeField] private Node current;
     private int cellSize;
     
@@ -35,6 +36,7 @@ public class Grid : MonoBehaviour
        
        // try to change with current position
         startPositionIndex = Mathf.FloorToInt(startPosition.y ) * width + Mathf.FloorToInt(startPosition.x);
+        currentPositionIndex = Mathf.FloorToInt(currentPosition.y) * width + Mathf.FloorToInt(currentPosition.x);
         CreateGrid();
         CenterGridCamera();
     }
@@ -117,6 +119,7 @@ public class Grid : MonoBehaviour
             Debug.Log(cost.Fcost);
 
             current = startNode;
+            startPositionIndex = currentPositionIndex;
             node.openList.Remove(current);
             node.closedList.Add(current);
             
@@ -125,11 +128,20 @@ public class Grid : MonoBehaviour
                 Debug.Log("Found the path");
                 break;
             }
-            startPositionIndex += 1;
-            current = grid[startPositionIndex];
+
+            for (int i = 0; i < node.neighbourList.Count; i++)
+            {
+                if (node.closedList.Contains(current))
+                {
+                    i++;
+                }
+            }
+            currentPositionIndex += 1;
+            current = grid[currentPositionIndex];
             Debug.Log("current 1: " + current);
-            startPositionIndex -= 2;
-            current = grid[startPositionIndex];
+            node.neighbourList.Add(current);
+            currentPositionIndex -= 1;
+            current = grid[currentPositionIndex];
             Debug.Log("current 2: " + current);
             break;
         }
