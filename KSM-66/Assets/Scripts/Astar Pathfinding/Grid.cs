@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using UnityEditor.Timeline;
 using UnityEngine;
+using System.Linq;
 
 public class Grid : MonoBehaviour
 {
@@ -34,7 +35,6 @@ public class Grid : MonoBehaviour
             closedList = new List<Node>(),
         };*/
        
-       // try to change with current position
         startPositionIndex = Mathf.FloorToInt(startPosition.y ) * width + Mathf.FloorToInt(startPosition.x);
         currentPositionIndex = Mathf.FloorToInt(currentPosition.y) * width + Mathf.FloorToInt(currentPosition.x);
         CreateGrid();
@@ -98,27 +98,16 @@ public class Grid : MonoBehaviour
         while (node.openList.Count > 0)
         {
             //Pathfinding
-            var hCost = Vector3.Distance(currentPosition, goalPosition);
-            var gCost = Vector3.Distance(currentPosition, startPosition);
+            
             
             Debug.Log("current pos : " + currentPosition);
             Debug.Log("start pos : " + startPosition);
             Debug.Log("goal pos : " + goalPosition);
-            
-            Node.GHF cost = new Node.GHF((int)gCost, ((int)hCost));
-            
-            cost.Fcost = (int)gCost + (int)hCost;
-            node.openList.Sort();
-            foreach (var item in node.openList)
-            {
-                Debug.Log("item: " + item);
-            }
-            Debug.Log("G cost: " + cost.Gcost);
-            Debug.Log("H cost: " + cost.Hcost);
-            Debug.Log("F cost: " + cost.Fcost);
-            Debug.Log(cost.Fcost);
 
-            current = startNode;
+            Cost(node.Fcost);
+            Debug.Log(node.Fcost);
+
+            /*current = startNode;
             startPositionIndex = currentPositionIndex;
             node.openList.Remove(current);
             node.closedList.Add(current);
@@ -142,7 +131,25 @@ public class Grid : MonoBehaviour
             node.neighbourList.Add(current);
             currentPositionIndex -= 1;
             current = grid[currentPositionIndex];
-            Debug.Log("current 2: " + current);
+            Debug.Log("current 2: " + current);*/
+            
+            
+            var test = grid[startPositionIndex + 2];
+            var test2 = grid[startPositionIndex - 1];
+            node.openList.Add(test);
+            node.openList.Add(test2);
+            //node.openList.Sort();
+            Debug.Log("Before sorting: ");
+            foreach (var node in node.openList)
+            {
+                Debug.Log($"Node: {node.name}, Fcost: {node.Fcost}");
+            }
+            node.openList.Sort();
+            Debug.Log("After sorting: ");
+            foreach (var node in node.openList)
+            {
+                Debug.Log($"Node: {node.name}, Fcost: {node.Fcost}");
+            }
             break;
         }
     }
@@ -151,5 +158,15 @@ public class Grid : MonoBehaviour
     private void CenterGridCamera()
     {
         cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);   
+    }
+
+    private int Cost(int f)
+    {
+        var hCost = Vector3.Distance(currentPosition, goalPosition);
+        var gCost = Vector3.Distance(currentPosition, startPosition);
+        var fCost = Mathf.FloorToInt(gCost + hCost);
+
+        fCost = node.Fcost;
+        return fCost;
     }
 }
