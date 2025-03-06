@@ -21,7 +21,11 @@ public class Grid : MonoBehaviour
     [SerializeField] int totalNodes;
     [SerializeField] private int startPositionIndex;
     [SerializeField] private int currentPositionIndex;
+    [SerializeField] private int goalPositionIndex;
     [SerializeField] private Node current;
+    private Node startNode;
+    private Node neighbour;
+    private Node goalNode;
     private int cellSize;
     
     [Header("Camera")]
@@ -29,14 +33,9 @@ public class Grid : MonoBehaviour
     
     private void Start()
     {
-       /* node = new Node(new Vector2(0, 0))
-        {               
-            openList = new List<Node>(),
-            closedList = new List<Node>(),
-        };*/
-       
         startPositionIndex = Mathf.FloorToInt(startPosition.y ) * width + Mathf.FloorToInt(startPosition.x);
         currentPositionIndex = Mathf.FloorToInt(currentPosition.y) * width + Mathf.FloorToInt(currentPosition.x);
+        goalPositionIndex = Mathf.FloorToInt(goalPosition.y) * width + Mathf.FloorToInt(goalPosition.x);
         CreateGrid();
         CenterGridCamera();
     }
@@ -54,7 +53,6 @@ public class Grid : MonoBehaviour
             for (int x = 0; x < width; x++)
             {
                var index = y * width + x;
-               Debug.Log("index: " + index);
                 var spawnGrid = Instantiate(nodePrefab, new Vector3(x, y), Quaternion.identity);
                 grid[index] = spawnGrid.GetComponent<Node>();
                 
@@ -89,49 +87,53 @@ public class Grid : MonoBehaviour
         node.closedList = new List<Node>();
         
         // Start node on the open list
-        Node startNode = grid[startPositionIndex];
-        Debug.Log("start node: " + startNode);
-        Debug.Log("startPosIndex: " + startPositionIndex);
+        startNode = grid[startPositionIndex]; // Grid 8x8: startNode = 2 0
+        goalNode = grid[goalPositionIndex]; // Grid 8x8: goalNode = 5 7 
         node.openList.Add(startNode);
-        Debug.Log("node list: " + node.openList.Contains(startNode));
+        
         //Infinite loop (will get out after I find the path)
         while (node.openList.Count > 0)
         {
             //Pathfinding
             
-            
-            Debug.Log("current pos : " + currentPosition);
-            Debug.Log("start pos : " + startPosition);
-            Debug.Log("goal pos : " + goalPosition);
+            // Cost(node.Fcost);
+            // Debug.Log(node.Fcost);
 
-            Cost(node.Fcost);
-            Debug.Log(node.Fcost);
-
-            /*current = startNode;
-            startPositionIndex = currentPositionIndex;
+            current = startNode;
+            for (int i = 1; i < node.openList.Count; i++)
+            {
+                if (node.openList[i].Fcost < current.Fcost || node.openList[i].Fcost == current.Fcost && node.openList[i].Hcost < current.Hcost)
+                {
+                    current = node.openList[i];
+                }
+            }
             node.openList.Remove(current);
             node.closedList.Add(current);
             
-            if (currentPosition == goalPosition)
+            Debug.Log("F COST TEST: " + Cost(startNode, goalNode));
+            
+            if (current == goalNode)
             {
-                Debug.Log("Found the path");
-                break;
+                Debug.Log("Found the path, good job!");
+                return;
             }
 
             for (int i = 0; i < node.neighbourList.Count; i++)
             {
-                if (node.closedList.Contains(current))
+                if (node.closedList.Contains(current) || node.isBlocked)
                 {
-                    i++;
+                    continue;
                 }
+                
             }
-            currentPositionIndex += 1;
-            current = grid[currentPositionIndex];
-            Debug.Log("current 1: " + current);
-            node.neighbourList.Add(current);
-            currentPositionIndex -= 1;
-            current = grid[currentPositionIndex];
-            Debug.Log("current 2: " + current);*/
+            
+            // currentPositionIndex += 1;
+            // current = grid[currentPositionIndex];
+            // Debug.Log("current 1: " + current);
+            // node.neighbourList.Add(current);
+            // currentPositionIndex -= 1;
+            // current = grid[currentPositionIndex];
+            // Debug.Log("current 2: " + current);
             
             
             var test = grid[startPositionIndex + 2];
@@ -160,13 +162,31 @@ public class Grid : MonoBehaviour
         cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);   
     }
 
-    private int Cost(int f)
+    private int Cost(Node a, Node b)
     {
-        var hCost = Vector3.Distance(currentPosition, goalPosition);
-        var gCost = Vector3.Distance(currentPosition, startPosition);
-        var fCost = Mathf.FloorToInt(gCost + hCost);
+        a.X = Mathf.FloorToInt(a.transform.position.x);
+        b.X = Mathf.FloorToInt(b.transform.position.x);
+        a.Y = Mathf.FloorToInt(a.transform.position.y);
+        b.Y = Mathf.FloorToInt(b.transform.position.y);
+        
+        int distanceX = Mathf.Abs(a.X - b.X);
+        int distanceY = Mathf.Abs(a.Y - b.Y);
 
-        fCost = node.Fcost;
-        return fCost;
+        return distanceX + distanceY;
     }
+
+    List<Node> FindNeighbour(Node node)
+    {
+        node.X =  Mathf.FloorToInt(node.transform.position.x);
+        node.Y = Mathf.FloorToInt(node.transform.position.y);
+        
+        node.X += 1; // Right neighbour
+        node.X -= 1; // Left neighbour
+
+        node.Y += 1; // Up neighbour
+        node.Y -= 1; // Down neighbour
+
+        return node.neighbourList;
+    }
+    
 }

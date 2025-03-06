@@ -13,7 +13,8 @@ public class Node : MonoBehaviour, IComparable<Node>
     public int Gcost;
     public int Hcost;
     public int Fcost;
-
+    public int X;
+    public int Y;
     public Node(Vector2 WorldPosition)
     {
         WorldPosition = worldPosition;
