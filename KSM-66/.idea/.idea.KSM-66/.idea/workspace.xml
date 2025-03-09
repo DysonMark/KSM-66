@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f821f318-9a47-4f69-9b02-e640a2f1741d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KSM-66/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KSM-66/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pathfinding.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pathfinding.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Grid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Grid.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Node.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Node.cs" afterDir="false" />
@@ -108,6 +109,9 @@
       <workItem from="1741087263389" duration="7635000" />
       <workItem from="1741173354599" duration="6919000" />
       <workItem from="1741240705884" duration="12848000" />
+      <workItem from="1741331549409" duration="27017000" />
+      <workItem from="1741417071319" duration="12405000" />
+      <workItem from="1741507075291" duration="2945000" />
     </task>
     <servers />
   </component>

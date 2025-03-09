@@ -6,6 +6,7 @@ using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using UnityEditor.Timeline;
 using UnityEngine;
 using System.Linq;
+using Unity.Collections;
 
 public class Grid : MonoBehaviour
 {
@@ -23,16 +24,23 @@ public class Grid : MonoBehaviour
     [SerializeField] private int currentPositionIndex;
     [SerializeField] private int goalPositionIndex;
     [SerializeField] private Node current;
+    [SerializeField] private Node neighbour;
     private Node startNode;
-    private Node neighbour;
     private Node goalNode;
     private int cellSize;
+    private int index;
+    private float pathIndex = 0;
+    public float playerSpeed = 2f;
     
     [Header("Camera")]
     [SerializeField] private Transform cam;
+
+    [Header("Player")] public GameObject player;
+    
     
     private void Start()
     {
+        player.transform.position = startPosition;
         startPositionIndex = Mathf.FloorToInt(startPosition.y ) * width + Mathf.FloorToInt(startPosition.x);
         currentPositionIndex = Mathf.FloorToInt(currentPosition.y) * width + Mathf.FloorToInt(currentPosition.x);
         goalPositionIndex = Mathf.FloorToInt(goalPosition.y) * width + Mathf.FloorToInt(goalPosition.x);
@@ -52,7 +60,7 @@ public class Grid : MonoBehaviour
         { 
             for (int x = 0; x < width; x++)
             {
-               var index = y * width + x;
+                index = y * width + x;
                 var spawnGrid = Instantiate(nodePrefab, new Vector3(x, y), Quaternion.identity);
                 grid[index] = spawnGrid.GetComponent<Node>();
                 
@@ -72,10 +80,6 @@ public class Grid : MonoBehaviour
                 {
                     spawnGrid.GetComponent<SpriteRenderer>().color = Color.cyan;
                 }
-                if (spawnGrid.transform.position == goalPosition)
-                {
-                    spawnGrid.GetComponent<SpriteRenderer>().color = Color.red;
-                }
                 #endregion
                 // String interpolation to show which Node in inspector
                 spawnGrid.name = $"Node {x} {y}";
@@ -87,19 +91,16 @@ public class Grid : MonoBehaviour
         node.closedList = new List<Node>();
         
         // Start node on the open list
-        startNode = grid[startPositionIndex]; // Grid 8x8: startNode = 2 0
-        goalNode = grid[goalPositionIndex]; // Grid 8x8: goalNode = 5 7 
+        startNode = grid[startPositionIndex]; // Grid 8x8: example: startNode = 2 0
+        goalNode = grid[goalPositionIndex]; // Grid 8x8: example: goalNode = 5 7 
+
         node.openList.Add(startNode);
         
         //Infinite loop (will get out after I find the path)
         while (node.openList.Count > 0)
         {
             //Pathfinding
-            
-            // Cost(node.Fcost);
-            // Debug.Log(node.Fcost);
-
-            current = startNode;
+            current = node.openList[0];
             for (int i = 1; i < node.openList.Count; i++)
             {
                 if (node.openList[i].Fcost < current.Fcost || node.openList[i].Fcost == current.Fcost && node.openList[i].Hcost < current.Hcost)
@@ -109,51 +110,66 @@ public class Grid : MonoBehaviour
             }
             node.openList.Remove(current);
             node.closedList.Add(current);
-            
-            Debug.Log("F COST TEST: " + Cost(startNode, goalNode));
-            
+
             if (current == goalNode)
             {
-                Debug.Log("Found the path, good job!");
+                GoBackToStart(startNode, goalNode);
                 return;
             }
 
-            for (int i = 0; i < node.neighbourList.Count; i++)
+            foreach (Node newNeighbour in FindNeighbour(current, grid))
             {
-                if (node.closedList.Contains(current) || node.isBlocked)
+                if (newNeighbour.isBlocked || node.closedList.Contains(newNeighbour))
                 {
                     continue;
                 }
-                
+                int neighbourCost = current.Gcost + Cost(current, newNeighbour);
+                if (neighbourCost < neighbour.Gcost || !node.openList.Contains(newNeighbour))
+                {
+                    newNeighbour.Gcost = neighbourCost;
+                    newNeighbour.Hcost = Cost(newNeighbour, goalNode);
+                    newNeighbour.parent = current;
+                                                        
+                    if (!node.openList.Contains(newNeighbour))
+                    {
+                        node.openList.Add(newNeighbour);
+                    }
+                }
+                newNeighbour.neighbourList.Add(newNeighbour);
+                newNeighbour.GetComponent<SpriteRenderer>().color = Color.black;
             }
-            
-            // currentPositionIndex += 1;
-            // current = grid[currentPositionIndex];
-            // Debug.Log("current 1: " + current);
-            // node.neighbourList.Add(current);
-            // currentPositionIndex -= 1;
-            // current = grid[currentPositionIndex];
-            // Debug.Log("current 2: " + current);
-            
-            
-            var test = grid[startPositionIndex + 2];
-            var test2 = grid[startPositionIndex - 1];
-            node.openList.Add(test);
-            node.openList.Add(test2);
-            //node.openList.Sort();
-            Debug.Log("Before sorting: ");
-            foreach (var node in node.openList)
-            {
-                Debug.Log($"Node: {node.name}, Fcost: {node.Fcost}");
-            }
-            node.openList.Sort();
-            Debug.Log("After sorting: ");
-            foreach (var node in node.openList)
-            {
-                Debug.Log($"Node: {node.name}, Fcost: {node.Fcost}");
-            }
-            break;
         }
+    }
+
+    List<Node> GoBackToStart(Node startNode, Node goalNode)
+    {
+        List<Node> path = new List<Node>();
+        Node currentNode = goalNode;
+
+        while (currentNode != startNode)
+        {
+            path.Add(currentNode);
+            currentNode = currentNode.parent;
+            
+            foreach (Node goodPath in path)
+            {
+                goodPath.GetComponent<SpriteRenderer>().color = Color.green;
+            }
+           
+        }
+        path.Reverse();
+        
+        if (pathIndex < path.Count)
+        {
+            player.transform.position = Vector3.MoveTowards(player.transform.position, path[(int)pathIndex].transform.position, playerSpeed * Time.deltaTime);
+            var distance = Vector3.Distance(player.transform.position, path[(int)pathIndex].transform.position);
+
+            if (distance <= 0.05f)
+            {
+                pathIndex++;
+            }
+        }   
+        return path;
     }
     
     // Center the camera at the middle of the grid by dividing the grid in width and height
@@ -161,6 +177,7 @@ public class Grid : MonoBehaviour
     {
         cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);   
     }
+    
 
     private int Cost(Node a, Node b)
     {
@@ -174,19 +191,30 @@ public class Grid : MonoBehaviour
 
         return distanceX + distanceY;
     }
-
-    List<Node> FindNeighbour(Node node)
+    List<Node> FindNeighbour(Node node, Node[] grid)
     {
         node.X =  Mathf.FloorToInt(node.transform.position.x);
         node.Y = Mathf.FloorToInt(node.transform.position.y);
         
-        node.X += 1; // Right neighbour
-        node.X -= 1; // Left neighbour
-
-        node.Y += 1; // Up neighbour
-        node.Y -= 1; // Down neighbour
-
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0)
+                    continue;
+                int checkX = node.X + x;
+                int checkY = node.Y + y;
+                if (checkX >= 0 && checkX < width && checkY >= 0 && checkY < height)
+                {
+                    node.neighbourList.Add(grid[checkY * width + checkX]);
+                }
+            }
+        }
         return node.neighbourList;
     }
-    
+
+    private void Update()
+    {
+        GoBackToStart(startNode, goalNode);
+    }
 }
