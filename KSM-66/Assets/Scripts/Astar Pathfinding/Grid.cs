@@ -1,14 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
-using UnityEditor.Timeline;
 using UnityEngine;
-using System.Linq;
-using Unity.Collections;
 
-public class Grid : MonoBehaviour
+namespace Dyson.GPG.Astar
+{
+    public class Grid : MonoBehaviour
 {
     [Header("Grid")]
     [SerializeField] private int height;
@@ -217,4 +212,6 @@ public class Grid : MonoBehaviour
     {
         GoBackToStart(startNode, goalNode);
     }
+}
+    
 }
