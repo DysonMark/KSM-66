@@ -11,9 +11,9 @@ namespace Dyson.GPG.GOAP
 
         private void BuyAPC()
         {
-            if (prerequisite.hasMoney)
+            if (prerequisite.hasGun)
             {
-                effects.getPC = true;
+                effects.getGun = true;
             }
         }
     }   

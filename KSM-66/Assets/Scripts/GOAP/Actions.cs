@@ -7,11 +7,15 @@ namespace Dyson.GPG.GOAP
     public class Actions : MonoBehaviour
     {
         public List<Actions> action;
-        public Actions buyPC;
+        public Actions buyGun;
+        public Actions waitForBullets;
+        public Actions waitForGun;
         public int Cost;
         private void Start()
         {
-            action.Add(buyPC);
+            action.Add(buyGun);
+            action.Add(waitForBullets);
+            action.Add(waitForGun);
         }
     }   
 }

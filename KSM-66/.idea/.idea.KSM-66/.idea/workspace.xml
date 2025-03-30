@@ -6,20 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f821f318-9a47-4f69-9b02-e640a2f1741d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KSM-66/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KSM-66/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Start.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Start.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pathfinding.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pathfinding.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/SceneTemplateSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/SceneTemplateSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Effects.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Effects.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/GOAP.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/GOAP.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Prerequisite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Prerequisite.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +113,8 @@
       <workItem from="1741417071319" duration="12405000" />
       <workItem from="1741507075291" duration="2945000" />
       <workItem from="1742280344298" duration="2104000" />
-      <workItem from="1743229682907" duration="374000" />
+      <workItem from="1743229682907" duration="3852000" />
+      <workItem from="1743318978364" duration="1263000" />
     </task>
     <servers />
   </component>
