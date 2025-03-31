@@ -8,11 +8,12 @@ public class Effects : MonoBehaviour
     
     // Buy a PC effect
 
-    public bool getGun;
-    public bool getBullets;
-    private void Start()    
+    public bool getPoisoned;
+    public bool getHydrated;
+    private void Start()
     {
-        effects.Add(getGun);
-        effects.Add(getBullets);
+        effects = new List<bool>();
+        effects.Add(getPoisoned);
+        effects.Add(getHydrated);
     }
 }

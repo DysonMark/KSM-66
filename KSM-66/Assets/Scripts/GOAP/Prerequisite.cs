@@ -7,40 +7,23 @@ namespace Dyson.GPG.GOAP
 {
     public class Prerequisite : MonoBehaviour
     {
-        public List<bool> prequisite;
+        public List<bool> prerequisites;
 
         public int Cost;    
         // Buy a PC
-        public bool hasGun; 
+        public bool waterIsNearby;
+        public bool noConditions;
+        
         private void Start()
         {
-            prequisite.Add(hasGun);
-            StartCoroutine(WaitForGun());
+            prerequisites = new List<bool>();
+            prerequisites.Add(waterIsNearby);
+            prerequisites.Add(noConditions);
         }
 
         private void Update()
         {
-            BuyGun();
-        }
-
-        private void BuyGun()
-        {
-            hasGun = false;
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                hasGun = true;
-                Cost += 5;
-                Debug.Log("Bought gun");
-                Debug.Log("Cost value: " + Cost);
-            }
-        }
-
-        IEnumerator WaitForGun()
-        {
-            Debug.Log("Waiting for a gun...");
-            yield return new WaitForSeconds(10);
-            Debug.Log("Received gun");
-            hasGun = true;
+            
         }
     }    
 }

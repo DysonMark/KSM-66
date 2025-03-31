@@ -8,13 +8,6 @@ namespace Dyson.GPG.GOAP
         public Actions actions;
         public Effects effects;
         public Prerequisite prerequisite;
-
-        private void BuyAPC()
-        {
-            if (prerequisite.hasGun)
-            {
-                effects.getGun = true;
-            }
-        }
+        
     }   
 }
