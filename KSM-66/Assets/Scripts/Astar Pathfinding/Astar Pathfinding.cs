@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AstarPathfinding : MonoBehaviour
+namespace Dyson.GPG.Astar
 {
-    void Start()
+    public class AstarPathfinding : MonoBehaviour
     {
+        void Start()
+        {
 
+        }
     }
 }
 /*
