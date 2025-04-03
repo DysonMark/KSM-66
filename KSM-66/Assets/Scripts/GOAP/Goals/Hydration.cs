@@ -7,7 +7,7 @@ namespace Dyson.GPG.GOAP
 {
     public class Hydration : Actions
     {
-        private float timer = 100;
+        public float hydrationLevel = 100;
         public Prerequisite prerequisitesHydration;
         public enum ThirstyLevel
         {
@@ -16,15 +16,15 @@ namespace Dyson.GPG.GOAP
             NeedWaterNow = 0
         }
         public ThirstyLevel thirstyLevel;
-        private void Start()
+        public virtual void Start()
         { 
             
         }
 
         // Update is called once per frame
-        void Update()
+        public virtual void Update()
         {
-            HydrationLevel();
+            Dehydration();
         }
 
         private int EnumToIntConverter(Enum enumIntValue)
@@ -32,42 +32,45 @@ namespace Dyson.GPG.GOAP
             return Convert.ToInt32(enumIntValue);
         }
 
-        public void PlayerNotThirsty()
+        public virtual void PlayerNotThirsty()
         {
             ExecuteLowPriorityAction(EnumToIntConverter(ThirstyLevel.NotThirsty));
         }
         
-        public void PlayerThirsty()
+        public virtual void PlayerThirsty()
         {
-            ExecuteLowPriorityAction(EnumToIntConverter(ThirstyLevel.Thirsty));
+            ExecuteMidPriorityAction(EnumToIntConverter(ThirstyLevel.Thirsty));
         }
         
-        public void PlayerNeedCriticalWater()
+        public virtual void PlayerNeedCriticalWater()
         {
-            ExecuteLowPriorityAction(EnumToIntConverter(ThirstyLevel.NeedWaterNow));
+            ExecuteHighPriorityAction(EnumToIntConverter(ThirstyLevel.NeedWaterNow));
         }
         public override void CheckPrerequisites()
         {
             base.CheckPrerequisites();
         }
 
-        private void HydrationLevel()
+        private void Dehydration()
         {
-            timer -= 1 * Time.deltaTime;
+            hydrationLevel -= 1 * Time.deltaTime;
 
-            if (timer <= 100 && timer >= 50)
+            if (hydrationLevel <= 100 && hydrationLevel >= 50)
             {
                 thirstyLevel = ThirstyLevel.NotThirsty;
+                PlayerNotThirsty();
             }
 
-            if (timer <= 50 && timer >= 0)
+            if (hydrationLevel <= 50 && hydrationLevel >= 0)
             {
                 thirstyLevel = ThirstyLevel.Thirsty;
+                PlayerThirsty();
             }
 
-            if (timer <= 0)
+            if (hydrationLevel <= 0)
             {
                 thirstyLevel = ThirstyLevel.NeedWaterNow;
+                PlayerNeedCriticalWater();
             }
         }
     }

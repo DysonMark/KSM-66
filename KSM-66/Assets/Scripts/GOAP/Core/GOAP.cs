@@ -10,8 +10,6 @@ namespace Dyson.GPG.GOAP
         public Effects effects;
         public Prerequisite prerequisites;
         
-
-      
         private void Start()
         {
             effects.effects = new Dictionary<string, bool>();
