@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Dyson.GPG.GOAP;
 using UnityEngine;
 
 namespace Dyson.GPG.Astar
@@ -7,37 +8,24 @@ namespace Dyson.GPG.Astar
     public class AstarPathfinding : MonoBehaviour
     {
         [SerializeField] private Grid gridSystem;
-        private Node startNode;
-        private Node goalNode;
+        public Node startNode;
+        public Node goalNode;
         private Node current;
-        private float pathIndex = 0;
-        private List<Node> currentPath = new List<Node>();
-
-
-        private void Start()
-        {
-            InitializePathfinding(gridSystem, gridSystem.startPositionIndex, gridSystem.goalPositionIndex);
-        }
-
-        private void Update()
-        {
-            GoBackToStart(startNode, goalNode);
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                FindPath(startNode, goalNode);
-            }
-            MoveToPath();
-        }
+        public float pathIndex = 0;
+        public List<Node> currentPath = new List<Node>();
+        public bool isPlayerMoving;
+        public Patrol _patrol;
         public void InitializePathfinding(Grid grid, int startIndex, int goalIndex)
         {
+            goalIndex = _patrol.patrolIndexOfficial;
             gridSystem = grid;
             startNode = gridSystem.grid[startIndex];
             goalNode = gridSystem.grid[goalIndex];
-
+            
             FindPath(startNode, goalNode);
         }
 
-        private void FindPath(Node startNode, Node goalNode)
+        public void FindPath(Node startNode, Node goalNode)
         {
             List<Node> openList = new List<Node>();
             List<Node> closedList = new List<Node>();
@@ -61,7 +49,6 @@ namespace Dyson.GPG.Astar
                 if (current == goalNode)
                 {
                     currentPath = GoBackToStart(startNode, goalNode);
-                    pathIndex = 0;
                     return;
                 }
 
@@ -91,7 +78,7 @@ namespace Dyson.GPG.Astar
             }
         }
 
-        private List<Node> GoBackToStart(Node startNode, Node goalNode)
+        public List<Node> GoBackToStart(Node startNode, Node goalNode)
         {
             List<Node> path = new List<Node>();
             Node currentNode = goalNode;
@@ -106,13 +93,12 @@ namespace Dyson.GPG.Astar
                     goodPath.GetComponent<SpriteRenderer>().color = Color.green;
                 }
             }
-
             path.Reverse();
             
             return path;
         }
 
-        private void MoveToPath()
+        public void MoveToPath()
         {
             if (currentPath.Count == 0)
             {
@@ -122,10 +108,12 @@ namespace Dyson.GPG.Astar
             {
                 gridSystem.player.transform.position = Vector3.MoveTowards(gridSystem.player.transform.position, currentPath[(int)pathIndex].transform.position, gridSystem.playerSpeed * Time.deltaTime);
                 var distance = Vector3.Distance(gridSystem.player.transform.position, currentPath[(int)pathIndex].transform.position);
+                isPlayerMoving = true;
 
                 if (distance <= 0.05f)
                 {
                     pathIndex++;
+                    isPlayerMoving = false;
                 }
             }
         }

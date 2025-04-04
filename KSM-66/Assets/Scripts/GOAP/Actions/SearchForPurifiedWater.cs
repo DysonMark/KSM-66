@@ -2,25 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using Dyson.GPG.Astar;
 using UnityEngine;
+using Grid = Dyson.GPG.Astar.Grid;
 
 namespace Dyson.GPG.GOAP
 {
     public class SearchForPurifiedWater : Hydration
     {
-        public AstarPathfinding path;
-        public override void Update()
+        public AstarPathfinding _path;
+        public Grid _grid;
+        
+ /*       public override void PlayerThirsty()
         {
-            base.Update();
-        }
-
-        public override void PlayerNotThirsty()
-        {
-            base.PlayerNotThirsty();
-        }
-
+            base.PlayerThirsty();
+            FindWaterSource();
+        } */
         public void FindWaterSource()
         {
-            Debug.Log("here here");
+           _path.InitializePathfinding(_grid, _grid.startPositionIndex, _grid.goalPositionIndex);
+           _path.MoveToPath();
         }
     }
 }

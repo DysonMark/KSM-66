@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Dyson.GPG.GOAP;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Dyson.GPG.Astar
@@ -17,7 +19,7 @@ namespace Dyson.GPG.Astar
         [SerializeField] public int startPositionIndex;
         [SerializeField] private int currentPositionIndex;
         [SerializeField] public int goalPositionIndex;
-
+        public Patrol _patrol;
         [Header("Camera")]
         [SerializeField] private Transform cam;
 
@@ -27,11 +29,12 @@ namespace Dyson.GPG.Astar
 
         private void Start()
         {
+            player = Instantiate(player);
             player.transform.position = startPosition;
             startPositionIndex = Mathf.FloorToInt(startPosition.y) * width + Mathf.FloorToInt(startPosition.x);
             currentPositionIndex = Mathf.FloorToInt(currentPosition.y) * width + Mathf.FloorToInt(currentPosition.x);
             goalPositionIndex = Mathf.FloorToInt(goalPosition.y) * width + Mathf.FloorToInt(goalPosition.x);
-            
+            //goalPositionIndex = _patrol.patrolIndexOfficial;
             CreateGrid();
             CenterGridCamera();
         }

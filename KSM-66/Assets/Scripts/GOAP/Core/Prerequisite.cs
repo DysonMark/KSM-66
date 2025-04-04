@@ -5,12 +5,9 @@ using System.Collections;
 
 namespace Dyson.GPG.GOAP
 {
-    public class Prerequisite : MonoBehaviour
+    public abstract class Prerequisite : MonoBehaviour
     {
-        public Dictionary<string, bool> prerequisites;
         
-        public bool waterIsNearby;
-        public bool noConditions;
     }    
 }
 

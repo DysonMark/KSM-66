@@ -1,44 +1,49 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Dyson.GPG.GOAP;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Dyson.GPG.GOAP
 {
-    public class DrinkPoisonedWater : Hydration
+    public class DrinkPoisonedWater : Actions
     {
         [SerializeField] private int random;
-        public override void Start()
+        public Hydration _hydration;
+        private bool isPlayerPoisoned;
+        public void Start()
         {
-            base.Start();
             random = Random.Range(0, 2);
-
+        }
+        public override bool CheckPrerequisites()
+        {
+            return _hydration.PlayerNeedCriticalWater;
         }
 
-        public override void Update()
+        private void Update()
         {
-            base.Update();
+            if (_hydration.PlayerNeedCriticalWater)
+            {
+                ExecuteAction();
+            }
         }
 
-        public override void PlayerNeedCriticalWater()
+        public override void ExecuteAction()
         {
-            base.PlayerNeedCriticalWater();
-            
-            //TODO: If water is nearby and player is really thirsty, consume water
-            
             Debug.Log("*Consume water*, you need it or you will die!");
             Debug.Log("There is 50% chance of you getting poisoned");
-
+            
             if (random == 0)
             {
                 Debug.Log("You got poisoned");
+                isPlayerPoisoned = true;
             }
-           if (random == 1)
+            else
             {
                 Debug.Log("You drinked water and you are not poisoned");
-                hydrationLevel += 50;
+               _hydration.hydrationLevel += 50;
             }
-            
         }
     }
 }

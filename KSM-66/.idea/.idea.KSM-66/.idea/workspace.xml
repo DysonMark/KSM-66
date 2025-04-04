@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f821f318-9a47-4f69-9b02-e640a2f1741d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KSM-66/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KSM-66/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GOAP testing.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GOAP testing.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Astar Pathfinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Astar Pathfinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Grid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Grid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/DrinkPoisonedWater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/DrinkPoisonedWater.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/SearchForPurifiedWater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/SearchForPurifiedWater.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/Actions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/Actions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/GOAP.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/GOAP.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/Prerequisite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/Prerequisite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Goals/Hydration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Goals/Hydration.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +137,7 @@
       <workItem from="1743625675420" duration="2000" />
       <workItem from="1743625694590" duration="50000" />
       <workItem from="1743660570226" duration="24454000" />
-      <workItem from="1743746953962" duration="213000" />
+      <workItem from="1743746957538" duration="26488000" />
     </task>
     <servers />
   </component>

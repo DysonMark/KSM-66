@@ -13,7 +13,6 @@ namespace Dyson.GPG.GOAP
         private void Start()
         {
             effects.effects = new Dictionary<string, bool>();
-            prerequisites.prerequisites = new Dictionary<string, bool>();
         }
     }   
 }
