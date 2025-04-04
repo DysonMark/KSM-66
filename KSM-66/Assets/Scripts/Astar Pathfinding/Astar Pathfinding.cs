@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,12 +6,28 @@ namespace Dyson.GPG.Astar
 {
     public class AstarPathfinding : MonoBehaviour
     {
-        private Grid gridSystem;
+        [SerializeField] private Grid gridSystem;
         private Node startNode;
         private Node goalNode;
         private Node current;
         private float pathIndex = 0;
+        private List<Node> currentPath = new List<Node>();
 
+
+        private void Start()
+        {
+            InitializePathfinding(gridSystem, gridSystem.startPositionIndex, gridSystem.goalPositionIndex);
+        }
+
+        private void Update()
+        {
+            GoBackToStart(startNode, goalNode);
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                FindPath(startNode, goalNode);
+            }
+            MoveToPath();
+        }
         public void InitializePathfinding(Grid grid, int startIndex, int goalIndex)
         {
             gridSystem = grid;
@@ -43,7 +60,8 @@ namespace Dyson.GPG.Astar
 
                 if (current == goalNode)
                 {
-                    GoBackToStart(startNode, goalNode);
+                    currentPath = GoBackToStart(startNode, goalNode);
+                    pathIndex = 0;
                     return;
                 }
 
@@ -90,23 +108,26 @@ namespace Dyson.GPG.Astar
             }
 
             path.Reverse();
+            
+            return path;
+        }
 
-            if (pathIndex < path.Count)
+        private void MoveToPath()
+        {
+            if (currentPath.Count == 0)
             {
-                gridSystem.player.transform.position = Vector3.MoveTowards(gridSystem.player.transform.position, path[(int)pathIndex].transform.position, gridSystem.playerSpeed * Time.deltaTime);
-                var distance = Vector3.Distance(gridSystem.player.transform.position, path[(int)pathIndex].transform.position);
+                return;
+            }
+            if (pathIndex < currentPath.Count)
+            {
+                gridSystem.player.transform.position = Vector3.MoveTowards(gridSystem.player.transform.position, currentPath[(int)pathIndex].transform.position, gridSystem.playerSpeed * Time.deltaTime);
+                var distance = Vector3.Distance(gridSystem.player.transform.position, currentPath[(int)pathIndex].transform.position);
 
                 if (distance <= 0.05f)
                 {
                     pathIndex++;
                 }
             }
-            return path;
-        }
-
-        private void Update()
-        {
-            GoBackToStart(startNode, goalNode);
         }
 
         private int Cost(Node a, Node b)

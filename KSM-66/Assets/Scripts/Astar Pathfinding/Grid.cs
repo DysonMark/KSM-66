@@ -14,9 +14,9 @@ namespace Dyson.GPG.Astar
         public Vector3 startPosition;
         [SerializeField] public Node[] grid;
         [SerializeField] private int totalNodes;
-        [SerializeField] private int startPositionIndex;
+        [SerializeField] public int startPositionIndex;
         [SerializeField] private int currentPositionIndex;
-        [SerializeField] private int goalPositionIndex;
+        [SerializeField] public int goalPositionIndex;
 
         [Header("Camera")]
         [SerializeField] private Transform cam;
@@ -34,8 +34,6 @@ namespace Dyson.GPG.Astar
             
             CreateGrid();
             CenterGridCamera();
-
-            FindObjectOfType<AstarPathfinding>().InitializePathfinding(this, startPositionIndex, goalPositionIndex);
         }
 
         private void CreateGrid()

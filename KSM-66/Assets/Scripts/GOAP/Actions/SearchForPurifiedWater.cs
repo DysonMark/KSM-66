@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Dyson.GPG.Astar;
 using UnityEngine;
 
 namespace Dyson.GPG.GOAP
 {
     public class SearchForPurifiedWater : Hydration
     {
-        // Start is called before the first frame update
-        void Start()
+        public AstarPathfinding path;
+        public override void Update()
         {
-
+            base.Update();
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void PlayerNotThirsty()
         {
+            base.PlayerNotThirsty();
+        }
 
+        public void FindWaterSource()
+        {
+            Debug.Log("here here");
         }
     }
 }
