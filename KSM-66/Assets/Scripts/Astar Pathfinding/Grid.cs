@@ -29,7 +29,7 @@ namespace Dyson.GPG.Astar
 
         private void Start()
         {
-            player = Instantiate(player);
+         //   player = Instantiate(player);
             player.transform.position = startPosition;
             startPositionIndex = Mathf.FloorToInt(startPosition.y) * width + Mathf.FloorToInt(startPosition.x);
             currentPositionIndex = Mathf.FloorToInt(currentPosition.y) * width + Mathf.FloorToInt(currentPosition.x);

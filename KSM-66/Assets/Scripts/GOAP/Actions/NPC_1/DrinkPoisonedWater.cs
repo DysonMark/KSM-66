@@ -11,7 +11,7 @@ namespace Dyson.GPG.GOAP
     {
         [SerializeField] private int random;
         public Hydration _hydration;
-        private bool isPlayerPoisoned;
+        [SerializeField] private bool isPlayerPoisoned;
         public void Start()
         {
             random = Random.Range(0, 2);
@@ -20,15 +20,7 @@ namespace Dyson.GPG.GOAP
         {
             return _hydration.PlayerNeedCriticalWater;
         }
-
-        private void Update()
-        {
-            if (_hydration.PlayerNeedCriticalWater)
-            {
-                ExecuteAction();
-            }
-        }
-
+        
         public override void ExecuteAction()
         {
             Debug.Log("*Consume water*, you need it or you will die!");

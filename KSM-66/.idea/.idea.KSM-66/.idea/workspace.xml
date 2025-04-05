@@ -5,16 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f821f318-9a47-4f69-9b02-e640a2f1741d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KSM-66/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KSM-66/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GOAP testing.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GOAP testing.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Astar Pathfinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Astar Pathfinding.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Grid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Grid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/DrinkPoisonedWater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/DrinkPoisonedWater.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/SearchForPurifiedWater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/SearchForPurifiedWater.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/DrinkPoisonedWater.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/DrinkPoisonedWater.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/Patrol.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/Patrol.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/SearchForPurifiedWater.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/SearchForPurifiedWater.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/Actions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/Actions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/GOAP.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/GOAP.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/Prerequisite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Core/Prerequisite.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Goals/Hydration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Goals/Hydration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GOAP/Goals/Hydration.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GOAP/Goals/Hydration.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +34,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Astar Pathfinding/Astar Pathfinding.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GOAP/Actions/DrinkPoisonedWater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GOAP/Goals/Hydration.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GOAP/PlaySound.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GOAP/PlayerVision.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -138,6 +146,7 @@
       <workItem from="1743625694590" duration="50000" />
       <workItem from="1743660570226" duration="24454000" />
       <workItem from="1743746957538" duration="26488000" />
+      <workItem from="1743832899338" duration="22121000" />
     </task>
     <servers />
   </component>

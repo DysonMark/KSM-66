@@ -6,7 +6,7 @@ using Grid = Dyson.GPG.Astar.Grid;
 
 namespace Dyson.GPG.GOAP
 {
-    public class Patrol : Hydration
+    public class Patrol : Actions
     {
         public AstarPathfinding _patrolPath;
         public Node _node;
@@ -19,7 +19,12 @@ namespace Dyson.GPG.GOAP
         public List<int> randomPatrolCheck;
         public Grid _gridPatrol;
         [SerializeField] private int randomPatrol;
+        public Hydration _hydration;
 
+        private bool IsCoroutineRunning = false;
+        private bool playerPatrol = true;
+
+        private Coroutine patrolRoutine;
         public void Start()
         {
             patrolIndexOne = Mathf.FloorToInt(patrolPoints[0].transform.position.y) * _gridPatrol.width +
@@ -28,17 +33,28 @@ namespace Dyson.GPG.GOAP
                              Mathf.FloorToInt(patrolPoints[1].transform.position.x);
             patrolIndexThree = Mathf.FloorToInt(patrolPoints[2].transform.position.y) * _gridPatrol.width +
                              Mathf.FloorToInt(patrolPoints[2].transform.position.x);
-            StartCoroutine(whichPatrolIndex());
         }
 
-        private void Patrolling()
-        { 
-            _patrolPath.InitializePathfinding(_gridPatrol, _gridPatrol.startPositionIndex, patrolIndexOfficial);
-            _patrolPath.MoveToPath();
+        public override bool CheckPrerequisites()
+        {
+            return _hydration.PlayerThirsty;
         }
-        
+
+        public override void ExecuteAction()
+        {
+            if (!IsCoroutineRunning)
+            {
+                StartCoroutine(whichPatrolIndex());
+            }
+            if (_hydration.PlayerNeedCriticalWater || _hydration.PlayerNotThirsty)
+            {
+                playerPatrol = false;
+                _gridPatrol.player.transform.position = _gridPatrol.startPosition;
+            }
+        }
         IEnumerator whichPatrolIndex()
         {
+            IsCoroutineRunning = true;
             while (true)
             {
                 do
@@ -62,9 +78,13 @@ namespace Dyson.GPG.GOAP
                 _gridPatrol.player.transform.position = _gridPatrol.startPosition;
                 _patrolPath.InitializePathfinding(_gridPatrol, _gridPatrol.startPositionIndex, patrolIndexOfficial);
 
-                yield return StartCoroutine(MovePathCoroutine());
-                _patrolPath.pathIndex = 0;
-                yield return new WaitForSeconds(2f);
+                if (playerPatrol)
+                {
+                    yield return StartCoroutine(MovePathCoroutine());
+                    _patrolPath.pathIndex = 0;
+                    IsCoroutineRunning = false;
+                }
+                yield return new WaitForSeconds(5f);
             }
         }
         private IEnumerator MovePathCoroutine()
