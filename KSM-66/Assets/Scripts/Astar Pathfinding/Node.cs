@@ -35,7 +35,6 @@ namespace Dyson.GPG.Astar
                 isBlocked = true;
             }
         }
-
         private void OnDrawGizmos()
         {
             Vector3 boxSize = new Vector3(0.6f, 0.8f, 1);

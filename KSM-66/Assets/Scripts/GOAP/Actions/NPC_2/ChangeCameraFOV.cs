@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Dyson.GPG.GOAP
 {
-    public class SpawnText : Actions
+    public class ChangeCameraFOV : Actions
     {
         public Camera camera;
         public bool noPrequisites;
@@ -16,7 +16,12 @@ namespace Dyson.GPG.GOAP
 
         public override void ExecuteAction()
         {
-            camera.fieldOfView = 130f;
+            camera.fieldOfView = 100f;
+        }
+
+        public override int CalculateCost()
+        {
+            return 0;
         }
     }
 }

@@ -10,9 +10,13 @@ namespace Dyson.GPG.GOAP
         public Grid _gridIdle;
         public Hydration _hydration;
 
+        public override int CalculateCost()
+        {
+            return 1;
+        }
         public override bool CheckPrerequisites()
         {
-            return _hydration.PlayerNotThirsty;
+            return _hydration.playerNotThirsty;
         }
 
         public override void ExecuteAction()

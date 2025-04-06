@@ -9,7 +9,6 @@ namespace Dyson.GPG.GOAP
     public class Patrol : Actions
     {
         public AstarPathfinding _patrolPath;
-        public Node _node;
         public List<Transform> patrolPoints;
         private int patrolIndexOne;
         private int patrolIndexTwo;
@@ -37,7 +36,7 @@ namespace Dyson.GPG.GOAP
 
         public override bool CheckPrerequisites()
         {
-            return _hydration.PlayerThirsty;
+            return _hydration.playerThirsty;
         }
 
         public override void ExecuteAction()
@@ -46,11 +45,15 @@ namespace Dyson.GPG.GOAP
             {
                 StartCoroutine(whichPatrolIndex());
             }
-            if (_hydration.PlayerNeedCriticalWater || _hydration.PlayerNotThirsty)
+            if (_hydration.playerNeedCriticalWater || _hydration.playerNotThirsty)
             {
                 playerPatrol = false;
                 _gridPatrol.player.transform.position = _gridPatrol.startPosition;
             }
+        }
+        public override int CalculateCost()
+        {
+            return 4;
         }
         IEnumerator whichPatrolIndex()
         {

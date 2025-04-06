@@ -4,11 +4,27 @@ using UnityEngine;
 
 namespace Dyson.GPG.GOAP
 {
-    public abstract class Actions : MonoBehaviour
+    public class Actions : MonoBehaviour
     {
-        public float cost;
+        public float Cost { get; set; }
         private bool hasActionBeenExecuted = false;
-        public abstract void ExecuteAction();
+        public List<Actions> actionsList;
+
+        public virtual void ExecuteAction()
+        {
+            
+        }
+
+        public virtual int CalculateCost()
+        {
+            return -1;
+        }
+        private void Awake()
+        {
+            Cost = CalculateCost();
+            actionsList = new List<Actions>();
+        }
+
         public virtual bool CheckPrerequisites()
         {
             return true;

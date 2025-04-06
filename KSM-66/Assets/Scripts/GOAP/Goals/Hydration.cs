@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace Dyson.GPG.GOAP
@@ -8,15 +9,17 @@ namespace Dyson.GPG.GOAP
     public class Hydration : MonoBehaviour
     {
         public float hydrationLevel = 100;
-        public bool PlayerNeedCriticalWater = false;
-        public bool PlayerThirsty = false;
-        public bool PlayerNotThirsty = false;
+        public bool playerNeedCriticalWater = false;
+        public bool playerThirsty = false;
+        public bool playerNotThirsty = false;
         public DrinkPoisonedWater _drinkPoisonedWater;
         public Patrol _patrol;
         public Idle _idle;
         private bool isPoisonedWaterConsumed;
         public PlayerVision _canSeeWater;
         public PlaySound _isPlayerScared;
+        public TextMeshProUGUI timerText;
+        public Actions _actions;
         public enum ThirstyLevel
         {
             NotThirsty = 100,
@@ -34,22 +37,22 @@ namespace Dyson.GPG.GOAP
         private void DrinkWater()
         {
             hydrationLevel += 5;
-            Debug.Log("Water has been seen and drinked");
         }
 
         private void Sweat()
         {
             hydrationLevel -= 5;
-            Debug.Log("Player got scared and lost -5 hydrationLevel");
         }
         public virtual void Update()
         {
             Dehydration();
-        }
-
-        private int EnumToIntConverter(Enum enumIntValue)
-        {
-            return Convert.ToInt32(enumIntValue);
+            for (int i = 0; i < _actions.actionsList.Count; i++)
+            {
+                if (_actions.actionsList.Contains(_drinkPoisonedWater.playerPoisoned))
+                {
+                    playerThirsty = false;
+                }
+            }
         }
         private void PlayerNeedWater()
         {
@@ -77,30 +80,31 @@ namespace Dyson.GPG.GOAP
         private void Dehydration()
         {
             hydrationLevel -= 1 * Time.deltaTime;
+            timerText.text = hydrationLevel.ToString();
             
             if (hydrationLevel <= 100 && hydrationLevel >= 50)
             {
                 thirstyLevel = ThirstyLevel.NotThirsty;
-                PlayerNotThirsty = true;
-                PlayerThirsty = false;
-                PlayerNeedCriticalWater = false;
+                playerNotThirsty = true;
+                playerThirsty = false;
+                playerNeedCriticalWater = false;
                 PlayerIsNotThirsty();
             }
 
             else if (hydrationLevel <= 50 && hydrationLevel >= 0)
             {
                 thirstyLevel = ThirstyLevel.Thirsty;
-                PlayerThirsty = true;
-                PlayerNeedCriticalWater = false;
-                PlayerNotThirsty = false;
+                playerThirsty = true;
+                playerNeedCriticalWater = false;
+                playerNotThirsty = false;
                 PlayerIsThirsty();
             }
             else
             {
                 thirstyLevel = ThirstyLevel.NeedWaterNow;
-                PlayerNeedCriticalWater = true;
-                PlayerThirsty = false;
-                PlayerNotThirsty = false;
+                playerNeedCriticalWater = true;
+                playerThirsty = false;
+                playerNotThirsty = false;
                 PlayerNeedWater();
             }
         }

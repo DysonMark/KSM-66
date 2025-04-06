@@ -7,23 +7,34 @@ namespace Dyson.GPG.GOAP
     public class GOAP : MonoBehaviour
     {
         public List<Actions> goapActions;
-        //public Effects effects;
-        //public Prerequisite prerequisites;
-        
-        private void Start()
+        public Actions _actions;
+        private Actions bestAction;
+        private float cost;
+        private void WhichActions()
         {
- //           effects.effects = new Dictionary<string, bool>();
-        }
-
-        private void Update()
-        {
+            float lowestCost = float.MaxValue;
+            
             foreach (var action in goapActions)
             {
                 if (action.CheckPrerequisites())
                 {
-                    action.TryExecuteAction();
-                    break;
+                    cost = _actions.CalculateCost();
+                    if (cost < lowestCost)
+                    {
+                        lowestCost = cost;
+                        bestAction = action;
+                    }
                 }
+            }
+            _actions = bestAction;
+        }
+        private void Update()
+        {
+            WhichActions();
+
+            if (_actions != null)
+            {
+                _actions.TryExecuteAction();
             }
         }
     }   

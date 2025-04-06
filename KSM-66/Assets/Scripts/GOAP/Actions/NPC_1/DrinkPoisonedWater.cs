@@ -12,30 +12,35 @@ namespace Dyson.GPG.GOAP
         [SerializeField] private int random;
         public Hydration _hydration;
         [SerializeField] private bool isPlayerPoisoned;
+        public Actions _action;
+        public Actions playerPoisoned;
         public void Start()
         {
             random = Random.Range(0, 2);
         }
+
         public override bool CheckPrerequisites()
         {
-            return _hydration.PlayerNeedCriticalWater;
+            return _hydration.playerNeedCriticalWater;
         }
-        
+
+        public override int CalculateCost()
+        {
+            return 2;
+        }
+
         public override void ExecuteAction()
         {
-            Debug.Log("*Consume water*, you need it or you will die!");
-            Debug.Log("There is 50% chance of you getting poisoned");
-            
             if (random == 0)
             {
-                Debug.Log("You got poisoned");
                 isPlayerPoisoned = true;
+                _action.actionsList.Add(playerPoisoned);
             }
             else
             {
-                Debug.Log("You drinked water and you are not poisoned");
                _hydration.hydrationLevel += 50;
             }
+            
         }
     }
 }

@@ -24,7 +24,6 @@ namespace Dyson.GPG.Astar
             
             FindPath(startNode, goalNode);
         }
-
         public void FindPath(Node startNode, Node goalNode)
         {
             List<Node> openList = new List<Node>();
@@ -77,7 +76,6 @@ namespace Dyson.GPG.Astar
                 }
             }
         }
-
         public List<Node> GoBackToStart(Node startNode, Node goalNode)
         {
             List<Node> path = new List<Node>();
@@ -97,7 +95,6 @@ namespace Dyson.GPG.Astar
             
             return path;
         }
-
         public void MoveToPath()
         {
             if (currentPath.Count == 0)
@@ -117,7 +114,6 @@ namespace Dyson.GPG.Astar
                 }
             }
         }
-
         private int Cost(Node a, Node b)
         {
             a.X = Mathf.FloorToInt(a.transform.position.x);
@@ -130,7 +126,6 @@ namespace Dyson.GPG.Astar
 
             return distanceX + distanceY;
         }
-
         private List<Node> FindNeighbour(Node node, Node[] grid)
         {
             node.X = Mathf.FloorToInt(node.transform.position.x);
